@@ -180,96 +180,12 @@ interface VisualPanelProps {
 }
 
 function VisualPanel({ service, shouldReduceMotion, x, y }: VisualPanelProps) {
-  function VisualPanel({ service, shouldReduceMotion, x, y }: VisualPanelProps) {
   return (
     <motion.div
       style={{
         x: shouldReduceMotion ? 0 : x,
         y: shouldReduceMotion ? 0 : y,
         transform: "translateZ(40px)",
-      }}
-      className={`relative isolate overflow-visible ${
-        service.featured
-          ? "min-h-[240px] lg:h-full lg:min-h-0"
-          : "h-[190px]"
-      }`}
-    >
-      {/* Ambient glow */}
-      <motion.div
-        aria-hidden
-        animate={
-          shouldReduceMotion
-            ? undefined
-            : {
-                scale: [1, 1.08, 1],
-                opacity: [0.18, 0.28, 0.18],
-              }
-        }
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute -right-12 -top-10 h-56 w-56 rounded-full blur-[70px]"
-        style={{
-          background: "radial-gradient(circle,#7dd3fc55,transparent 70%)",
-        }}
-      />
-
-      {/* Floating illustration */}
-      <motion.img
-        src={service.image}
-        alt=""
-        draggable={false}
-        animate={
-          shouldReduceMotion
-            ? undefined
-            : {
-                y: [0, -6, 0],
-                rotate: [0, -1.5, 0],
-                scale: [1.03, 1.06, 1.03],
-              }
-        }
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className={`
-          absolute
-          object-contain
-          pointer-events-none
-          select-none
-          drop-shadow-[0_40px_50px_rgba(0,0,0,.28)]
-          ${
-            service.featured
-              ? "-right-10 -top-8 w-[118%] h-[118%]"
-              : "-right-8 -top-6 w-[112%] h-[112%]"
-          }
-        `}
-        style={{
-          objectPosition: service.imagePosition,
-        }}
-      />
-
-      {/* Bottom readability fade */}
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white via-white/70 to-transparent" />
-
-      {/* Light sweep */}
-      <motion.div
-        aria-hidden
-        initial={{ x: "-120%" }}
-        whileHover={{ x: "120%" }}
-        transition={{ duration: 0.9 }}
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(110deg,transparent 35%,rgba(255,255,255,.25) 50%,transparent 65%)",
-        }}
-      />
-    </motion.div>
-  );
-}
       }}
       className={`
         relative
