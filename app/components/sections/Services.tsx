@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, type PointerEvent as ReactPointerEvent } from "react";
 import {
   motion,
@@ -43,7 +44,7 @@ const services: Service[] = [
     description:
       "Business-led digital experiences that clarify your value, strengthen trust, and guide visitors toward action.",
     outcome: "Position clearly. Convert confidently.",
-    image: "/assets/illustrations/website-engineering.png",
+    image: "/assets/website-engineering.png",
     imagePosition: "center",
     visualLabel: "Digital experience",
     visualTitle: "Strategy → Interface → Conversion",
@@ -58,7 +59,7 @@ const services: Service[] = [
     description:
       "Connected workflows that reduce repetitive work, improve consistency, and keep operations moving.",
     outcome: "Less friction. Faster execution.",
-    image: "/assets/illustrations/intelligent-automation.png",
+    image: "/assets/automation-system.png",
     imagePosition: "center",
     visualLabel: "Connected workflow",
     visualTitle: "Input → Logic → Action",
@@ -72,7 +73,7 @@ const services: Service[] = [
     description:
       "Focused acquisition systems that connect message, audience, channel, and conversion around commercial goals.",
     outcome: "Reach the right demand. Convert intent.",
-    image: "/assets/illustrations/growth-marketing.png",
+    image: "/assets/growth-marketing.png",
     imagePosition: "center",
     visualLabel: "Acquisition system",
     visualTitle: "Attention → Intent → Revenue",
@@ -86,7 +87,7 @@ const services: Service[] = [
     description:
       "Credible, audience-aware content designed to communicate quickly, feel human, and support customer action.",
     outcome: "Create trust. Sustain attention.",
-    image: "/assets/illustrations/content-ugc.png",
+    image: "/assets/growth-marketing 1.png",
     imagePosition: "center",
     visualLabel: "Content engine",
     visualTitle: "Hook → Story → Action",
@@ -100,7 +101,7 @@ const services: Service[] = [
     description:
       "Purpose-built systems that combine strategy, automation, and AI around a genuine operational requirement.",
     outcome: "See clearly. Decide faster. Scale better.",
-    image: "/assets/illustrations/business-intelligence.png",
+    image: "/assets/business-intelligence.png",
     imagePosition: "center",
     visualLabel: "Growth operating system",
     visualTitle: "Insight → Decision → Execution",
@@ -180,6 +181,8 @@ interface VisualPanelProps {
 }
 
 function VisualPanel({ service, shouldReduceMotion, x, y }: VisualPanelProps) {
+  const illustration = service.image.replace(/\.png$/, ".png");
+
   return (
     <motion.div
       style={{
@@ -187,186 +190,21 @@ function VisualPanel({ service, shouldReduceMotion, x, y }: VisualPanelProps) {
         y: shouldReduceMotion ? 0 : y,
         transform: "translateZ(40px)",
       }}
-      className={`
-        relative
-        isolate
-        overflow-hidden
-        rounded-[1.35rem]
-        border
-        border-white/60
-        bg-[#172126]
-        shadow-[0_24px_55px_rgba(22,35,42,0.24),inset_0_1px_0_rgba(255,255,255,0.26)]
-        ${
-          service.featured
-            ? "min-h-[225px] lg:h-full lg:min-h-0"
-            : "h-[165px] sm:h-[180px]"
-        }
-      `}
+      className="absolute inset-0 isolate overflow-hidden"
     >
-      {/* Real-world image */}
-      <motion.div
-        aria-hidden="true"
-        animate={
-          shouldReduceMotion
-            ? undefined
-            : {
-                scale: [1.03, 1.07, 1.03],
-              }
-        }
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute inset-0 bg-cover"
-        style={{
-          backgroundImage: `url(${service.image})`,
-          backgroundPosition: service.imagePosition,
-        }}
-      />
-
-      {/* Executive image treatment */}
-      <div
-        aria-hidden="true"
-        className="
-          absolute
-          inset-0
-          bg-[linear-gradient(118deg,rgba(10,18,22,0.88)_0%,rgba(15,27,32,0.58)_43%,rgba(12,22,27,0.18)_72%,rgba(8,15,18,0.52)_100%)]
-        "
-      />
-
-      <div
-        aria-hidden="true"
-        className="
-          absolute
-          inset-0
-          opacity-[0.18]
-          mix-blend-screen
-        "
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px)
-          `,
-          backgroundSize: "54px 54px",
-        }}
-      />
-
-      {/* Directional glass beam */}
-      <motion.div
-        aria-hidden="true"
-        animate={
-          shouldReduceMotion
-            ? undefined
-            : {
-                x: ["-130%", "230%"],
-              }
-        }
-        transition={{
-          duration: 5.8,
-          repeat: Infinity,
-          repeatDelay: 1.4,
-          ease: "easeInOut",
-        }}
-        className="
-          absolute
-          inset-y-[-15%]
-          w-[28%]
-          rotate-[16deg]
-          bg-white/15
-          blur-2xl
-        "
-      />
-
-      {/* Visual meaning */}
-      <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 sm:p-5">
-        <div className="flex items-start justify-between gap-4">
-          <span
-            className="
-              rounded-full
-              border
-              border-white/25
-              bg-black/28
-              px-3
-              py-1.5
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.19em]
-              text-white/88
-              backdrop-blur-xl
-            "
-          >
-            {service.visualLabel}
-          </span>
-
-          <span
-            aria-hidden="true"
-            className="
-              h-2.5
-              w-2.5
-              rounded-full
-              border
-              border-white/55
-              bg-[#72d0da]
-              shadow-[0_0_18px_rgba(114,208,218,0.88)]
-            "
-          />
-        </div>
-
-        <div>
-          <p
-            className="
-              max-w-[520px]
-              text-[clamp(1rem,1.55vw,1.35rem)]
-              font-semibold
-              leading-[1.12]
-              tracking-[-0.025em]
-              text-white
-            "
-          >
-            {service.visualTitle}
-          </p>
-
-          <div className="mt-3 flex flex-wrap gap-2">
-            {service.signals.map((signal) => (
-              <span
-                key={signal}
-                className="
-                  rounded-full
-                  border
-                  border-white/22
-                  bg-white/10
-                  px-2.5
-                  py-1
-                  text-[9px]
-                  font-medium
-                  tracking-[0.08em]
-                  text-white/82
-                  backdrop-blur-xl
-                "
-              >
-                {signal}
-              </span>
-            ))}
-          </div>
-        </div>
+      <div className="pointer-events-none absolute inset-0 select-none">
+        <Image
+          fill
+          src={illustration}
+          alt=""
+          draggable={false}
+          sizes={
+            "(max-width: 1023px) 100vw, 50vw"
+          }
+          className="object-cover object-center"
+        />
       </div>
 
-      {/* Bottom structural line */}
-      <div
-        aria-hidden="true"
-        className="
-          absolute
-          inset-x-[8%]
-          bottom-0
-          h-px
-          bg-gradient-to-r
-          from-transparent
-          via-white/65
-          to-transparent
-        "
-      />
     </motion.div>
   );
 }
@@ -387,19 +225,11 @@ function ServiceCard({ service, index }: ServiceCardProps) {
   const smoothX = useSpring(pointerX, pointerSpring);
   const smoothY = useSpring(pointerY, pointerSpring);
 
-  const tilt = service.featured ? 2.2 : 3.5;
-
-  const rotateY = useTransform(smoothX, [-1, 1], [-tilt, tilt]);
-  const rotateX = useTransform(smoothY, [-1, 1], [tilt * 0.72, -tilt * 0.72]);
-
   const copyX = useTransform(smoothX, [-1, 1], [-2.5, 2.5]);
   const copyY = useTransform(smoothY, [-1, 1], [-2, 2]);
 
   const visualX = useTransform(smoothX, [-1, 1], [-7, 7]);
   const visualY = useTransform(smoothY, [-1, 1], [-5, 5]);
-
-  const glowX = useTransform(smoothX, [-1, 1], ["14%", "86%"]);
-  const glowY = useTransform(smoothY, [-1, 1], ["12%", "88%"]);
 
   const handlePointerMove = (event: ReactPointerEvent<HTMLElement>) => {
     if (shouldReduceMotion || event.pointerType === "touch") {
@@ -426,64 +256,54 @@ function ServiceCard({ service, index }: ServiceCardProps) {
     pointerY.set(0);
   };
 
-  const Icon = service.icon;
-
   return (
     <motion.div
       initial={{
         opacity: 0,
-        y: shouldReduceMotion ? 0 : 32,
-        scale: shouldReduceMotion ? 1 : 0.985,
+        y: shouldReduceMotion ? 0 : 36,
       }}
       whileInView={{
         opacity: 1,
         y: 0,
-        scale: 1,
       }}
       viewport={{
         once: true,
         amount: 0.18,
       }}
       transition={{
-        duration: shouldReduceMotion ? 0 : 0.78,
-        delay: shouldReduceMotion ? 0 : index * 0.07,
-        ease: cinematicEase,
+        duration: shouldReduceMotion ? 0 : 0.8,
+        delay: shouldReduceMotion ? 0 : index * 0.08,
+        ease: "easeOut",
       }}
       whileHover={
         shouldReduceMotion
           ? undefined
           : {
               y: -8,
-              scale: 1.008,
+              transition: {
+                duration: 0.5,
+                ease: cinematicEase,
+              },
             }
       }
       className={`
         group
         relative
         [perspective:1500px]
-        ${service.layout}
       `}
     >
       {/* Lifted shadow plane */}
-      <motion.div
+      <div
         aria-hidden="true"
-        animate={{
-          opacity: isHovered ? 0.64 : 0.34,
-          scaleX: isHovered ? 1.06 : 0.92,
-          y: isHovered ? 14 : 9,
-        }}
-        transition={{
-          duration: 0.5,
-          ease: cinematicEase,
-        }}
         className="
           pointer-events-none
           absolute
           inset-x-[8%]
-          bottom-[-13px]
+          bottom-[-8px]
           h-12
           rounded-[50%]
           blur-2xl
+          opacity-40
         "
         style={{
           background: palette.shadow,
@@ -495,8 +315,6 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
         style={{
-          rotateX: shouldReduceMotion ? 0 : rotateX,
-          rotateY: shouldReduceMotion ? 0 : rotateY,
           transformPerspective: 1500,
           transformStyle: "preserve-3d",
         }}
@@ -504,305 +322,142 @@ function ServiceCard({ service, index }: ServiceCardProps) {
           relative
           isolate
           overflow-hidden
-          rounded-[1.65rem]
-          p-px
+          rounded-[1.875rem]
           will-change-transform
         "
       >
-        {/* Four-edge travelling light */}
-        <motion.div
-          aria-hidden="true"
-          animate={
-            isHovered && !shouldReduceMotion
-              ? {
-                  rotate: 360,
-                  opacity: 1,
-                }
-              : {
-                  rotate: 0,
-                  opacity: 0,
-                }
-          }
-          transition={
-            isHovered && !shouldReduceMotion
-              ? {
-                  rotate: {
-                    duration: 2.1,
-                    repeat: Infinity,
-                    ease: "linear",
-                  },
-                  opacity: {
-                    duration: 0.22,
-                  },
-                }
-              : {
-                  duration: 0.3,
-                }
-          }
-          className="
-            pointer-events-none
-            absolute
-            -inset-[70%]
-            z-0
-          "
-          style={{
-            background: palette.border,
-          }}
-        />
-
-        {/* Card body */}
+        {/* Full-scene card body */}
         <div
           className={`
             relative
             z-10
             overflow-hidden
-            rounded-[calc(1.65rem-1px)]
+            rounded-[1.875rem]
             border
-            border-white/78
-            shadow-[0_30px_70px_rgba(26,46,55,0.16),0_8px_24px_rgba(34,58,68,0.09),inset_0_1px_0_rgba(255,255,255,0.98),inset_0_-1px_0_rgba(53,83,94,0.08)]
+            border-white/70
+            bg-[#edf3f5]
+            shadow-[0_40px_90px_rgba(120,150,180,0.15),inset_0_1px_0_rgba(255,255,255,0.92)]
             backdrop-blur-[30px]
-            ${service.featured ? "min-h-[350px]" : "min-h-[330px]"}
+            transition-shadow
+            duration-500
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            group-hover:shadow-[0_50px_100px_rgba(25,45,75,0.12),inset_0_1px_0_rgba(255,255,255,0.92)]
+            ${index < 2 ? "h-[390px]" : "h-[355px]"}
           `}
           style={{
-            background: palette.surface,
             transformStyle: "preserve-3d",
           }}
         >
-          {/* Mouse-following depth glow */}
           <motion.div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              z-0
-              h-[22rem]
-              w-[22rem]
-              -translate-x-1/2
-              -translate-y-1/2
-              rounded-full
-              opacity-0
-              blur-[38px]
-              transition-opacity
-              duration-500
-              group-hover:opacity-100
-            "
-            style={{
-              left: shouldReduceMotion ? "50%" : glowX,
-              top: shouldReduceMotion ? "50%" : glowY,
-              background: palette.glow,
-            }}
-          />
-
-          {/* Internal architectural texture */}
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-              z-0
-              opacity-[0.12]
-              [mask-image:linear-gradient(to_bottom,black,transparent_82%)]
-            "
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(36,62,72,0.10) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(36,62,72,0.10) 1px, transparent 1px)
-              `,
-              backgroundSize: "58px 58px",
-            }}
-          />
-
-          <div
-            className={`
-              relative
-              z-10
-              grid
-              min-h-[inherit]
-              gap-5
-              p-5
-              sm:p-6
-              ${
-                service.featured
-                  ? "lg:grid-cols-[0.84fr_1.16fr] lg:items-stretch lg:gap-6"
-                  : "grid-rows-[auto_1fr]"
-              }
-            `}
-            style={{
-              transformStyle: "preserve-3d",
-            }}
+            animate={{ scale: isHovered && !shouldReduceMotion ? 1.04 : 1 }}
+            transition={{ duration: 0.9, ease: cinematicEase }}
+            className="absolute inset-0"
           >
-            {/* Visual first on mobile, right side on featured desktop */}
-            <div className={service.featured ? "lg:order-2" : ""}>
-              <VisualPanel
-                service={service}
-                shouldReduceMotion={shouldReduceMotion}
-                x={visualX}
-                y={visualY}
-              />
+            <VisualPanel
+              service={service}
+              shouldReduceMotion={shouldReduceMotion}
+              x={visualX}
+              y={visualY}
+            />
+          </motion.div>
+
+          {/* Floating service information */}
+          <motion.div
+            style={{
+              x: shouldReduceMotion ? 0 : copyX,
+              y: shouldReduceMotion ? 0 : copyY,
+              transform: "translateZ(36px)",
+            }}
+            className="
+              absolute
+              inset-x-[18px]
+              bottom-[18px]
+              z-20
+              overflow-hidden
+              rounded-[1.375rem]
+              border
+              border-white/[0.65]
+              bg-white/[0.72]
+              px-6
+              py-[22px]
+              shadow-[0_18px_40px_rgba(30,50,80,0.12),inset_0_1px_0_rgba(255,255,255,0.82)]
+              backdrop-blur-[26px]
+              transition-colors
+              duration-500
+              group-hover:bg-white/75
+            "
+          >
+            <div className="flex items-center gap-3">
+              <h3
+                className="
+                min-w-0
+                flex-1
+                text-[28px]
+                font-bold
+                leading-none
+                tracking-[-0.04em]
+                text-[#1F2937]
+                sm:text-[34px]
+                lg:text-[40px]
+              "
+              >
+                {service.title}
+              </h3>
+
+              <a
+                href="#contact"
+                aria-label={`Discuss ${service.title}`}
+                className="
+                  group/link
+                  flex
+                  h-[46px]
+                  w-[46px]
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-[#26343a]/12
+                  bg-[#26343a]
+                  text-white
+                  shadow-[0_12px_26px_rgba(38,52,58,0.20)]
+                  transition-all
+                  duration-[350ms]
+                  hover:scale-[1.08]
+                  hover:bg-[#267f8f]
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-[#67b8c4]
+                  focus-visible:ring-offset-4
+                  focus-visible:ring-offset-transparent
+                "
+              >
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="
+                    h-4
+                    w-4
+                    transition-transform
+                    duration-[350ms]
+                    group-hover/link:rotate-45
+                  "
+                />
+              </a>
             </div>
 
-            {/* Copy */}
-            <motion.div
-              style={{
-                x: shouldReduceMotion ? 0 : copyX,
-                y: shouldReduceMotion ? 0 : copyY,
-                transform: "translateZ(36px)",
-              }}
-              className={`
-                flex
-                flex-col
-                ${
-                  service.featured
-                    ? "justify-center lg:order-1"
-                    : "justify-between"
-                }
-              `}
+            <p
+              className="
+                mt-2
+                line-clamp-2
+                max-w-[460px]
+                text-[15px]
+                leading-[1.7]
+                text-[#394a51]/[0.72]
+              "
             >
-              <div>
-                <div className="flex items-center justify-between gap-4">
-                  <div
-                    className="
-                      flex
-                      h-11
-                      w-11
-                      items-center
-                      justify-center
-                      rounded-[0.95rem]
-                      border
-                      border-white/86
-                      text-[#26383f]
-                      shadow-[0_13px_30px_rgba(46,75,85,0.12),inset_0_1px_0_rgba(255,255,255,1)]
-                      backdrop-blur-xl
-                    "
-                    style={{
-                      background: palette.icon,
-                    }}
-                  >
-                    <Icon
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                      strokeWidth={1.65}
-                    />
-                  </div>
-
-                  <span
-                    className="
-                      h-px
-                      flex-1
-                      bg-gradient-to-r
-                      from-[#547581]/30
-                      to-transparent
-                    "
-                  />
-                </div>
-
-                <h3
-                  className={`
-                    mt-4
-                    max-w-[560px]
-                    font-semibold
-                    leading-[1.02]
-                    tracking-[-0.045em]
-                    text-[#1f2a2f]
-                    ${
-                      service.featured
-                        ? "text-[clamp(1.85rem,2.8vw,3.05rem)]"
-                        : "text-[clamp(1.55rem,2vw,2.1rem)]"
-                    }
-                  `}
-                >
-                  {service.title}
-                </h3>
-
-                <p
-                  className="
-                    mt-3
-                    max-w-[560px]
-                    text-[15px]
-                    leading-[1.62]
-                    text-[#394a51]
-                    sm:text-[16px]
-                  "
-                >
-                  {service.description}
-                </p>
-              </div>
-
-              <div className="mt-5 flex items-end justify-between gap-4">
-                <p
-                  className="
-                    max-w-[440px]
-                    text-[13px]
-                    font-semibold
-                    leading-5
-                    tracking-[-0.01em]
-                    text-[#293b42]
-                    sm:text-[14px]
-                  "
-                >
-                  {service.outcome}
-                </p>
-
-                <a
-                  href="#contact"
-                  aria-label={`Discuss ${service.title}`}
-                  className="
-                    group/link
-                    flex
-                    h-10
-                    w-10
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    border
-                    border-[#26343a]/12
-                    bg-[#26343a]
-                    text-white
-                    shadow-[0_12px_26px_rgba(38,52,58,0.20)]
-                    transition-all
-                    duration-300
-                    hover:-translate-y-0.5
-                    hover:bg-[#10181c]
-                    focus-visible:outline-none
-                    focus-visible:ring-2
-                    focus-visible:ring-[#67b8c4]
-                    focus-visible:ring-offset-4
-                    focus-visible:ring-offset-transparent
-                  "
-                >
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    className="
-                      h-4
-                      w-4
-                      transition-transform
-                      duration-300
-                      group-hover/link:translate-x-0.5
-                      group-hover/link:-translate-y-0.5
-                    "
-                  />
-                </a>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Bottom material edge */}
-          <div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-x-[8%]
-              bottom-0
-              h-px
-              bg-gradient-to-r
-              from-transparent
-              via-white/88
-              to-transparent
-            "
-          />
+              {service.description}
+            </p>
+          </motion.div>
         </div>
       </motion.article>
     </motion.div>
@@ -991,7 +646,7 @@ export default function Services() {
               grid
               gap-7
               lg:grid-cols-[0.94fr_1.06fr]
-              lg:items-end
+              lg:items-center
               lg:gap-14
             "
           >
@@ -1061,46 +716,17 @@ export default function Services() {
               </h2>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:pb-1">
-              <p
-                className="
-                  max-w-[520px]
-                  text-[17px]
-                  font-medium
-                  leading-[1.66]
-                  text-[#2e3d44]
-                  sm:text-[18px]
-                "
-              >
-                Strategy, design, automation, and growth execution connected
-                around one commercial objective.
-              </p>
-
-              <p
-                className="
-                  max-w-[500px]
-                  text-[16px]
-                  leading-[1.66]
-                  text-[#46565d]
-                  sm:text-[17px]
-                "
-              >
-                Each visual shows the real business system behind the service,
-                so the value is understood before the detail is read.
-              </p>
-            </div>
           </motion.div>
 
           {/* Compact executive bento */}
           <div
             className="
-              mt-10
+              mt-12
               grid
               gap-5
-              md:grid-cols-2
-              lg:mt-12
-              lg:grid-cols-12
-              lg:gap-6
+              lg:grid-cols-2
+              lg:gap-x-[42px]
+              lg:gap-y-[42px]
               [perspective:1600px]
             "
           >
