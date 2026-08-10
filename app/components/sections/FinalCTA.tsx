@@ -12,7 +12,7 @@ export default function FinalCTA() {
     <section
       id="final-cta"
       aria-labelledby="final-cta-heading"
-      className="relative isolate flex min-h-[92vh] items-center overflow-hidden bg-[#FCFCFA] py-32 sm:py-44 lg:py-56"
+      className="relative isolate flex min-h-[600px] items-center overflow-hidden bg-[#FCFCFA] py-20 sm:py-24 lg:py-28"
     >
       <Container className="relative z-10 max-w-[1500px]">
         <motion.div

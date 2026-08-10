@@ -155,7 +155,7 @@ export default function FeaturedWork() {
     <section
       id="featured-work"
       aria-labelledby="featured-work-heading"
-      className="relative isolate min-h-[170vh] overflow-hidden bg-[#FCFCFA] py-28 sm:py-36 lg:py-44"
+      className="relative isolate overflow-hidden bg-[#FCFCFA] py-20 sm:py-24 lg:py-28"
     >
       <Container className="relative z-10 max-w-[1500px]">
         <motion.header
@@ -182,7 +182,7 @@ export default function FeaturedWork() {
           </p>
         </motion.header>
 
-        <div className="mt-24 grid grid-cols-1 gap-8 lg:mt-36 lg:grid-cols-12 lg:gap-10">
+        <div className="mt-16 grid grid-cols-1 gap-8 lg:mt-20 lg:grid-cols-12 lg:gap-10">
           {projects.map((project, index) => (
             <motion.article
               key={project.client}
@@ -193,10 +193,10 @@ export default function FeaturedWork() {
               whileHover={reduceMotion ? undefined : { y: -10 }}
               className={`group relative overflow-hidden rounded-[2rem] border border-white/80 bg-[linear-gradient(145deg,rgba(255,255,255,.76),rgba(247,246,241,.5))] p-5 shadow-[0_28px_80px_rgba(44,61,69,.09),inset_0_1px_0_rgba(255,255,255,1)] backdrop-blur-[30px] transition-[border-color,box-shadow] duration-500 hover:border-[#ead7b5] hover:shadow-[0_45px_110px_rgba(44,61,69,.14),inset_0_1px_0_rgba(255,255,255,1)] sm:p-7 ${
                 project.featured
-                  ? "lg:col-span-12 lg:grid lg:min-h-[720px] lg:grid-cols-[.82fr_1.18fr] lg:gap-10 lg:p-10"
+                  ? "lg:col-span-12 lg:grid lg:min-h-[620px] lg:grid-cols-[.82fr_1.18fr] lg:gap-10 lg:p-10"
                   : index === 1
-                    ? "lg:col-span-5 lg:min-h-[720px] lg:p-8"
-                    : "lg:col-span-7 lg:min-h-[640px] lg:self-end lg:p-8"
+                    ? "lg:col-span-5 lg:min-h-[600px] lg:p-8"
+                    : "lg:col-span-7 lg:min-h-[560px] lg:self-end lg:p-8"
               }`}
             >
               <span aria-hidden="true" className="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(222,194,145,.86),white,transparent)] opacity-70 transition-opacity duration-500 group-hover:opacity-100" />

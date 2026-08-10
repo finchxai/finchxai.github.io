@@ -14,7 +14,7 @@ const pillars = [
 export default function WhyFinchx() {
   const reduceMotion = Boolean(useReducedMotion());
   return (
-    <section id="about" className="bg-[#FCFCFA] py-32 sm:py-44 lg:py-56" aria-labelledby="why-finchx-heading">
+    <section id="about" className="bg-[#FCFCFA] py-20 sm:py-24 lg:py-28" aria-labelledby="why-finchx-heading">
       <Container className="max-w-[1500px]">
         <motion.h2 id="why-finchx-heading" initial={{ opacity: 0, y: reduceMotion ? 0 : 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: reduceMotion ? 0 : 0.75, ease }} className="max-w-[1080px] text-[clamp(3.1rem,7vw,7.2rem)] font-semibold leading-[.92] tracking-[-.065em] text-[#202b30]">
           Why Businesses Choose FINCHX

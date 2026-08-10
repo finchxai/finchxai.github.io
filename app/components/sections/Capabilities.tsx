@@ -83,7 +83,7 @@ export default function Capabilities() {
     <section
       id="capabilities"
       aria-labelledby="capabilities-heading"
-      className="relative isolate overflow-hidden bg-[#f4f6f5] py-28 sm:py-36 lg:py-44"
+      className="relative isolate overflow-hidden bg-[#f4f6f5] py-20 sm:py-24 lg:py-28"
     >
       <div
         aria-hidden="true"
@@ -121,7 +121,7 @@ export default function Capabilities() {
           </p>
         </motion.header>
 
-        <div className="mt-20 grid gap-6 sm:grid-cols-2 sm:gap-7 lg:mt-28 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-8">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 sm:gap-7 lg:mt-16 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-8">
           {capabilities.map((capability, index) => {
             const Icon = capability.icon;
 
@@ -148,7 +148,7 @@ export default function Capabilities() {
                       }
                 }
                 className={`${capability.placement} group relative overflow-hidden rounded-[1.7rem] border border-white/78 bg-[linear-gradient(145deg,rgba(255,255,255,.7),rgba(249,248,244,.4))] p-6 shadow-[0_22px_58px_rgba(45,68,80,.09),inset_0_1px_0_rgba(255,255,255,.98),inset_0_-1px_0_rgba(213,187,139,.14)] backdrop-blur-[32px] transform-gpu sm:p-7 ${
-                  capability.primary ? "lg:min-h-[620px] lg:p-10" : ""
+                  capability.primary ? "lg:min-h-[540px] lg:p-10" : ""
                 }`}
               >
                 <span
@@ -163,8 +163,8 @@ export default function Capabilities() {
                 <div
                   className={`relative flex flex-col ${
                     capability.primary
-                      ? "min-h-[400px] sm:min-h-[450px] lg:min-h-[540px]"
-                      : "min-h-[350px] sm:min-h-[370px]"
+                      ? "min-h-[380px] sm:min-h-[420px] lg:min-h-[460px]"
+                      : "min-h-[320px] sm:min-h-[330px]"
                   }`}
                 >
                   <span className="inline-flex h-14 w-14 items-center justify-center rounded-[1.05rem] border border-white/92 bg-[linear-gradient(145deg,rgba(255,255,255,.84),rgba(243,240,232,.48))] text-[#627983] shadow-[0_12px_28px_rgba(62,84,95,.09),inset_0_1px_0_rgba(255,255,255,1),inset_0_-1px_0_rgba(216,192,150,.18)]">

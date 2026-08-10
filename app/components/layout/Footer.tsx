@@ -11,13 +11,13 @@ const navigation = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#f4f4f1] pb-10 pt-28 sm:pt-36 lg:pt-44">
+    <footer className="relative overflow-hidden bg-[#f4f4f1] pb-8 pt-16 sm:pt-20 lg:pt-24">
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-[8%] top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(119,132,137,.18),transparent)]" />
       <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-[18%] top-0 w-px bg-[linear-gradient(180deg,transparent,rgba(121,134,139,.08),transparent)]" />
       <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-[22%] top-0 w-px bg-[linear-gradient(180deg,transparent,rgba(121,134,139,.07),transparent)]" />
 
       <Container className="relative z-10 max-w-[1500px]">
-        <div className="grid gap-20 lg:grid-cols-[1.25fr_.75fr] lg:gap-24">
+        <div className="grid gap-14 lg:grid-cols-[1.25fr_.75fr] lg:gap-20">
           <div>
             <p className="text-[clamp(3.8rem,8vw,8.6rem)] font-semibold leading-[.86] tracking-[-.075em] text-[#202b30]">
               FINCHX AI
@@ -55,7 +55,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-28 h-px bg-[linear-gradient(90deg,rgba(111,125,131,.05),rgba(111,125,131,.2),rgba(111,125,131,.05))] sm:mt-36" />
+        <div className="mt-16 h-px bg-[linear-gradient(90deg,rgba(111,125,131,.05),rgba(111,125,131,.2),rgba(111,125,131,.05))] sm:mt-20" />
         <div className="flex flex-col gap-3 pt-7 text-[11px] font-medium tracking-[.04em] text-[#7a878c] sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 FINCHX AI</p>
           <p>Crafted with Intelligence.</p>

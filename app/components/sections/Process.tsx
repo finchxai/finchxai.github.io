@@ -74,7 +74,7 @@ export default function Process() {
     <section
       id="process"
       aria-labelledby="process-heading"
-      className="relative isolate overflow-hidden bg-[#f8f8f5] py-28 sm:py-36 lg:py-44"
+      className="relative isolate overflow-hidden bg-[#f8f8f5] py-20 sm:py-24 lg:py-28"
     >
       <div
         aria-hidden="true"

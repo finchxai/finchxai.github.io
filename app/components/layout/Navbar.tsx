@@ -237,8 +237,8 @@ export default function Navbar() {
             lg:px-7
             ${
               isScrolled
-                ? "min-h-[78px] sm:min-h-[82px] lg:min-h-[86px]"
-                : "min-h-[78px] sm:min-h-[82px] lg:min-h-[86px]"
+                ? "min-h-[120px] sm:min-h-[110px] lg:min-h-[150px]"
+                : "min-h-[120px] sm:min-h-[110px] lg:min-h-[150px]"
             }
           `}
         >
@@ -407,9 +407,15 @@ w-auto
               "
               style={{ color: "#ffffff" }}
             >
-              <CalendarDays aria-hidden="true" className="relative z-10 h-4 w-4 text-white" />
+              <CalendarDays
+                aria-hidden="true"
+                className="relative z-10 h-4 w-4 text-white"
+              />
 
-              <span className="relative z-10 text-white" style={{ color: "#ffffff" }}>
+              <span
+                className="relative z-10 text-white"
+                style={{ color: "#ffffff" }}
+              >
                 Book a Strategy Call
               </span>
 
@@ -459,7 +465,11 @@ w-auto
 
           <button
             type="button"
-            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={
+              isMobileMenuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
             aria-expanded={isMobileMenuOpen}
             onClick={() => {
               setIsMobileMenuOpen((current) => !current);

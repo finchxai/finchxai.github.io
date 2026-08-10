@@ -29,7 +29,7 @@ export default function BusinessGrowthJourney() {
       <section
         id="ecosystem"
         aria-labelledby="ecosystem-heading"
-        className="relative py-28 sm:py-32 lg:py-40"
+        className="relative py-20 sm:py-24 lg:py-28"
       >
         <Container>
           <div className="mx-auto max-w-[1440px]">
@@ -58,7 +58,7 @@ export default function BusinessGrowthJourney() {
 
             <motion.div
               {...reveal(shouldReduceMotion, 0.1)}
-              className="relative mt-16 min-h-[620px] overflow-hidden rounded-[2.25rem] border border-white/70 bg-white/35 shadow-[0_42px_110px_rgba(38,73,92,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-[28px] lg:min-h-[700px]"
+              className="relative mt-12 min-h-[540px] overflow-hidden rounded-[2.25rem] border border-white/70 bg-white/35 shadow-[0_42px_110px_rgba(38,73,92,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-[28px] lg:min-h-[600px]"
             >
               <motion.div
                 animate={
@@ -84,7 +84,7 @@ export default function BusinessGrowthJourney() {
 
               <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(237,243,245,0.98)_0%,rgba(237,243,245,0.84)_25%,rgba(237,243,245,0.12)_58%,transparent_100%)]" />
 
-              <div className="relative z-20 flex min-h-[620px] max-w-[410px] flex-col justify-end p-7 sm:p-10 lg:min-h-[700px] lg:justify-center lg:p-14">
+              <div className="relative z-20 flex min-h-[540px] max-w-[410px] flex-col justify-end p-7 sm:p-10 lg:min-h-[600px] lg:justify-center lg:p-14">
                 <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#5f7c88]">
                   System architecture
                 </p>
@@ -175,7 +175,7 @@ export default function BusinessGrowthJourney() {
 
       <section
         aria-labelledby="pipeline-heading"
-        className="relative bg-[#e6eef1] py-28 sm:py-32 lg:py-40"
+        className="relative bg-[#e6eef1] py-20 sm:py-24 lg:py-28"
       >
         <Container>
           <div className="mx-auto max-w-[1440px]">
@@ -199,9 +199,9 @@ export default function BusinessGrowthJourney() {
 
             <motion.div
               {...reveal(shouldReduceMotion, 0.1)}
-              className="relative mt-14 overflow-hidden rounded-[2rem] border border-white/70 bg-white/42 shadow-[0_36px_90px_rgba(30,59,77,0.13)]"
+              className="relative mt-12 overflow-hidden rounded-[2rem] border border-white/70 bg-white/42 shadow-[0_36px_90px_rgba(30,59,77,0.13)]"
             >
-              <div className="relative h-[430px] sm:h-[560px] lg:h-[680px]">
+              <div className="relative h-[400px] sm:h-[500px] lg:h-[560px]">
                 <Image
                   fill
                   src="/assets/growth-marketing.png"
@@ -218,7 +218,7 @@ export default function BusinessGrowthJourney() {
 
       <section
         aria-labelledby="intelligence-heading"
-        className="relative py-28 sm:py-32 lg:py-40"
+        className="relative py-20 sm:py-24 lg:py-28"
       >
         <Container>
           <div className="mx-auto grid max-w-[1440px] items-center gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20">
@@ -243,7 +243,7 @@ export default function BusinessGrowthJourney() {
 
             <motion.div
               {...reveal(shouldReduceMotion, 0.1)}
-              className="relative min-h-[560px] overflow-hidden rounded-[2.25rem] border border-white/70 bg-white/38 shadow-[0_36px_92px_rgba(37,70,88,0.14)] sm:min-h-[650px]"
+              className="relative min-h-[500px] overflow-hidden rounded-[2.25rem] border border-white/70 bg-white/38 shadow-[0_36px_92px_rgba(37,70,88,0.14)] sm:min-h-[560px]"
             >
               <Image
                 fill
@@ -304,7 +304,7 @@ export default function BusinessGrowthJourney() {
 
       <section
         aria-labelledby="process-heading"
-        className="relative bg-[#e8f0f2] py-28 sm:py-32 lg:py-40"
+        className="relative bg-[#e8f0f2] py-20 sm:py-24 lg:py-28"
       >
         <div className="mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-10">
           <div>
@@ -327,7 +327,7 @@ export default function BusinessGrowthJourney() {
               </p>
             </div>
 
-            <div className="mx-auto mt-14 flex max-w-[760px] flex-col items-center text-center">
+            <div className="mx-auto mt-10 flex max-w-[760px] flex-col items-center text-center">
               <p className="text-[17px] leading-[1.72] text-[#46565d]">
                 Every milestone strengthens the next, creating one accountable
                 path from insight to sustainable growth.

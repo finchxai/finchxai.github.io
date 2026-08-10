@@ -26,7 +26,7 @@ export default function Contact() {
   const reduceMotion = Boolean(useReducedMotion());
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="relative isolate overflow-hidden bg-[#f7f7f4] py-32 sm:py-44 lg:py-56">
+    <section id="contact" aria-labelledby="contact-heading" className="relative isolate overflow-hidden bg-[#f7f7f4] py-20 sm:py-24 lg:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute right-[8%] top-[28%] h-[34rem] w-[34rem] rounded-full bg-white/58 blur-[110px]" />
       <Container className="relative z-10 max-w-[1500px]">
         <div className="grid gap-20 lg:grid-cols-[.72fr_1.28fr] lg:items-start lg:gap-24">

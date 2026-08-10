@@ -74,6 +74,7 @@ export default function Hero() {
         isolate
         flex
         min-h-[calc(100svh-100px)]
+        xl:min-h-[900px]
         w-full
         items-start
         overflow-hidden
@@ -123,15 +124,15 @@ export default function Hero() {
           w-full
           max-w-[1600px]
           px-5
-          pb-20
-          pt-16
+          pb-16
+          pt-14
           will-change-transform
           sm:px-8
-          sm:pb-24
-          sm:pt-20
+          sm:pb-20
+          sm:pt-16
           lg:px-14
-          lg:pb-28
-          lg:pt-20
+          lg:pb-20
+          lg:pt-16
           xl:px-20
         "
       >

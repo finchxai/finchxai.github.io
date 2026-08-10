@@ -20,14 +20,17 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="relative overflow-hidden bg-[#f8f8f5] py-32 sm:py-44 lg:py-56">
+    <section id="faq" aria-labelledby="faq-heading" className="relative overflow-hidden bg-[#f8f8f5] py-20 sm:py-24 lg:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[42%] h-[34rem] w-[70rem] -translate-x-1/2 rounded-full bg-white/55 blur-[120px]" />
-      <Container className="relative z-10 max-w-[1500px]">
+      <Container className="relative z-10 max-w-[1100px]">
         <motion.h2 id="faq-heading" initial={{ opacity: 0, y: reduceMotion ? 0 : 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: reduceMotion ? 0 : .75, ease }} className="max-w-[1100px] text-[clamp(3.1rem,7vw,7.2rem)] font-semibold leading-[.92] tracking-[-.065em] text-[#202b30]">
           Frequently Asked Questions
         </motion.h2>
+        <p className="mt-5 max-w-[620px] text-[16px] leading-[1.7] text-[#65747a]">
+          Clear answers about how FINCHX plans, builds, and improves connected growth systems.
+        </p>
 
-        <div className="mt-24 grid gap-5 lg:ml-auto lg:mt-36 lg:max-w-[1080px] lg:gap-6">
+        <div className="mt-12 grid items-start gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
           {faqs.map(([question, answer], index) => {
             const isOpen = openIndex === index;
             const panelId = `faq-panel-${index}`;
