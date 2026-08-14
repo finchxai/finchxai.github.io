@@ -1,159 +1,92 @@
 "use client";
 
-import { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { useMotionValue, useReducedMotion } from "framer-motion";
+import type { PointerEvent as ReactPointerEvent } from "react";
+import Navbar from "../layout/Navbar";
 import HeroBackground from "../background/HeroBackground";
 import HeroContent from "../hero/HeroContent";
-
-const scrollSpring = {
-  stiffness: 90,
-  damping: 28,
-  mass: 0.8,
-};
+import HeroSculpture from "../hero/HeroSculpture";
 
 export default function Hero() {
-  const heroReference = useRef<HTMLElement>(null);
-
   const shouldReduceMotion = Boolean(useReducedMotion());
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
 
-  const { scrollYProgress } = useScroll({
-    target: heroReference,
-    offset: ["start start", "end start"],
-  });
+  const handlePointerMove = (event: ReactPointerEvent<HTMLElement>) => {
+    if (shouldReduceMotion || event.pointerType === "touch") {
+      return;
+    }
 
-  const smoothProgress = useSpring(scrollYProgress, scrollSpring);
+    const bounds = event.currentTarget.getBoundingClientRect();
 
-  /*
-   * Background travels down as the page scrolls.
-   * Different layers inside HeroBackground still keep
-   * their existing mouse-parallax movement.
-   */
-  const backgroundY = useTransform(smoothProgress, [0, 1], [0, 240]);
+    pointerX.set(((event.clientX - bounds.left) / bounds.width) * 2 - 1);
+    pointerY.set(((event.clientY - bounds.top) / bounds.height) * 2 - 1);
+  };
 
-  const backgroundScale = useTransform(smoothProgress, [0, 1], [1, 1.08]);
-
-  const backgroundOpacity = useTransform(
-    smoothProgress,
-    [0, 0.72, 1],
-    [1, 0.72, 0.2],
-  );
-
-  /*
-   * Content gently separates from the background,
-   * then fades as the next section enters.
-   */
-  const contentY = useTransform(smoothProgress, [0, 1], [0, -92]);
-
-  const contentOpacity = useTransform(
-    smoothProgress,
-    [0, 0.58, 0.9, 1],
-    [1, 0.92, 0.25, 0],
-  );
-
-  const contentScale = useTransform(smoothProgress, [0, 1], [1, 0.975]);
-
-  const contentBlur = useTransform(
-    smoothProgress,
-    [0, 0.75, 1],
-    ["blur(0px)", "blur(0px)", "blur(4px)"],
-  );
+  const resetPointer = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   return (
-    <motion.section
-      ref={heroReference}
-      id="home"
-      aria-labelledby="hero-heading"
-      className="
-        relative
-        isolate
-        flex
-        min-h-[calc(100svh-100px)]
-        xl:min-h-[900px]
-        w-full
-        items-start
-        overflow-hidden
-      "
+    <section
+      id="hero"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+      className="relative h-screen min-h-[860px] overflow-hidden lg:min-h-[960px]"
     >
-      {/* Scroll-linked hero background */}
-      <motion.div
-        aria-hidden="true"
-        style={
-          shouldReduceMotion
-            ? undefined
-            : {
-                y: backgroundY,
-                scale: backgroundScale,
-                opacity: backgroundOpacity,
-              }
-        }
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          z-0
-          origin-center
-          overflow-hidden
-          will-change-transform
-        "
-      >
-        <HeroBackground />
-      </motion.div>
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <HeroBackground pointerX={pointerX} pointerY={pointerY} />
+      </div>
 
-      {/* Hero content */}
-      <motion.div
-        style={
-          shouldReduceMotion
-            ? undefined
-            : {
-                y: contentY,
-                opacity: contentOpacity,
-                scale: contentScale,
-                filter: contentBlur,
-              }
-        }
+      {/* Navbar belongs ONLY to Hero */}
+      <Navbar />
+
+      {/* Hero Content */}
+      <div
         className="
           relative
           z-10
           mx-auto
-          w-full
-          max-w-[1600px]
-          px-5
-          pb-16
-          pt-14
-          will-change-transform
-          sm:px-8
-          sm:pb-20
-          sm:pt-16
-          lg:px-14
-          lg:pb-20
-          lg:pt-16
+          flex
+          h-full
+          max-w-[1700px]
+          items-center
+          justify-between
+
+          px-10
           xl:px-20
+
+          pt-36
+          lg:pt-44
+
+          pb-48
         "
       >
-        <HeroContent />
-      </motion.div>
+        {/* Left */}
+        <div
+          className="
+            w-full
+            max-w-[700px]
 
-      {/*
-       * This protects the hero CTA label if an inherited
-       * text rule from the page or global CSS overrides it.
-       */}
-      <style>
-        {`
-          #home a[href="#contact"],
-          #home a[href="#contact"] *,
-          #home a[href="#contact"] svg {
-            color: #ffffff !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-          }
-        `}
-      </style>
-    </motion.section>
+            -translate-y-[72px]
+            lg:-translate-y-[64px]
+            xl:-translate-y-[56px]
+
+            will-change-transform
+          "
+        >
+          <HeroContent pointerX={pointerX} pointerY={pointerY} />
+        </div>
+
+        {/* Right */}
+        <div className="flex w-[48%] items-center justify-end">
+          <HeroSculpture pointerX={pointerX} pointerY={pointerY} />
+        </div>
+      </div>
+
+      {/* Soft transition into next section */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#F7F8FA]" />
+    </section>
   );
 }

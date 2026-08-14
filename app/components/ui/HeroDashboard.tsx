@@ -18,7 +18,7 @@ export default function HeroDashboard() {
       transition={{ duration: 0.9 }}
       className="relative w-[720px]"
     >
-      <div className="rounded-[36px] border border-white/10 bg-white/[0.05] p-8 backdrop-blur-3xl shadow-[0_40px_120px_rgba(0,0,0,.45)]">
+      <div className="rounded-[36px] border border-white/16 bg-white/[0.10] p-8 shadow-[0_40px_120px_rgba(0,0,0,.45)] backdrop-blur-3xl backdrop-brightness-75">
         {/* Header */}
 
         <div className="flex items-center justify-between">
@@ -41,19 +41,19 @@ export default function HeroDashboard() {
 
         <div className="mt-10 grid grid-cols-3 gap-4">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-white/50">Monthly Leads</p>
+            <p className="text-white/65">Monthly Leads</p>
             <h3 className="mt-3 text-5xl font-bold text-white">1,247</h3>
             <p className="mt-2 text-emerald-300">+38%</p>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-white/50">Automation</p>
+            <p className="text-white/65">Automation</p>
             <h3 className="mt-3 text-5xl font-bold text-white">98%</h3>
             <p className="mt-2 text-emerald-300">Running</p>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <p className="text-white/50">Revenue</p>
+            <p className="text-white/65">Revenue</p>
             <h3 className="mt-3 text-5xl font-bold text-white">$184K</h3>
             <p className="mt-2 text-emerald-300">+24%</p>
           </div>
@@ -64,7 +64,7 @@ export default function HeroDashboard() {
         <div className="mt-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-white/50">AI Performance Score</p>
+              <p className="text-white/65">AI Performance Score</p>
 
               <h2 className="mt-2 text-6xl font-bold text-white">94</h2>
             </div>
@@ -90,7 +90,7 @@ export default function HeroDashboard() {
 
             <h4 className="font-semibold text-white">Website</h4>
 
-            <p className="mt-2 text-sm text-white/50">Optimized</p>
+            <p className="mt-2 text-sm text-white/65">Optimized</p>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
@@ -98,7 +98,7 @@ export default function HeroDashboard() {
 
             <h4 className="font-semibold text-white">Security</h4>
 
-            <p className="mt-2 text-sm text-white/50">Protected</p>
+            <p className="mt-2 text-sm text-white/65">Protected</p>
           </div>
 
           <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
@@ -106,7 +106,7 @@ export default function HeroDashboard() {
 
             <h4 className="font-semibold text-white">AI Engine</h4>
 
-            <p className="mt-2 text-sm text-white/50">Online</p>
+            <p className="mt-2 text-sm text-white/65">Online</p>
           </div>
         </div>
       </div>

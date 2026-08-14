@@ -1,6 +1,5 @@
 import Environment from "./components/environment/Environment";
 
-import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import BusinessGrowthJourney from "./components/sections/BusinessGrowthJourney";
 import Capabilities from "./components/sections/Capabilities";
@@ -26,8 +25,6 @@ export default function HomePage() {
           text-[#232c31]
         "
       >
-        <Navbar />
-
         <Hero />
 
         <Services />

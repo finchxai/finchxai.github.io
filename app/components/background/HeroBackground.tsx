@@ -2,12 +2,11 @@
 
 import {
   motion,
-  useMotionValue,
   useReducedMotion,
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useEffect } from "react";
+import type { MotionValue } from "framer-motion";
 
 const cinematicEase = [0.22, 1, 0.36, 1] as const;
 
@@ -17,72 +16,74 @@ const cursorSpring = {
   mass: 0.65,
 };
 
-export default function HeroBackground() {
-  const shouldReduceMotion = Boolean(useReducedMotion());
+const cursorLightSpring = {
+  stiffness: 170,
+  damping: 28,
+  mass: 0.38,
+};
 
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
+interface HeroBackgroundProps {
+  pointerX: MotionValue<number>;
+  pointerY: MotionValue<number>;
+}
+
+export default function HeroBackground({
+  pointerX,
+  pointerY,
+}: HeroBackgroundProps) {
+  const shouldReduceMotion = Boolean(useReducedMotion());
 
   const smoothX = useSpring(pointerX, cursorSpring);
   const smoothY = useSpring(pointerY, cursorSpring);
 
-  const sceneX = useTransform(smoothX, [-1, 1], [-32, 32]);
-  const sceneY = useTransform(smoothY, [-1, 1], [-22, 22]);
+  const backgroundX = useTransform(smoothX, [-1, 1], [-12, 12]);
+  const backgroundY = useTransform(smoothY, [-1, 1], [-10, 10]);
 
-  const reverseX = useTransform(smoothX, [-1, 1], [24, -24]);
+  const ribbonOneX = useTransform(smoothX, [-1, 1], [-10, 10]);
+  const ribbonOneY = useTransform(smoothY, [-1, 1], [-10, 10]);
 
-  const reverseY = useTransform(smoothY, [-1, 1], [18, -18]);
+  const ribbonTwoX = useTransform(smoothX, [-1, 1], [18, -18]);
+  const ribbonTwoY = useTransform(smoothY, [-1, 1], [18, -18]);
 
-  const deepX = useTransform(smoothX, [-1, 1], [-45, 45]);
-  const deepY = useTransform(smoothY, [-1, 1], [-30, 30]);
+  const ribbonThreeX = useTransform(smoothX, [-1, 1], [-26, 26]);
+  const ribbonThreeY = useTransform(smoothY, [-1, 1], [-26, 26]);
 
-  const orbOneX = useTransform(smoothX, [-1, 1], [-38, 38]);
+  const cursorLightX = useSpring(pointerX, cursorLightSpring);
+  const cursorLightY = useSpring(pointerY, cursorLightSpring);
 
-  const orbOneY = useTransform(smoothY, [-1, 1], [-26, 26]);
+  const sceneX = useTransform(smoothX, [-1, 1], [-12, 12]);
+  const sceneY = useTransform(smoothY, [-1, 1], [-8, 8]);
 
-  const orbTwoX = useTransform(smoothX, [-1, 1], [28, -28]);
+  const reverseX = useTransform(smoothX, [-1, 1], [6, -6]);
 
-  const orbTwoY = useTransform(smoothY, [-1, 1], [20, -20]);
+  const reverseY = useTransform(smoothY, [-1, 1], [4, -4]);
+
+  const deepX = useTransform(smoothX, [-1, 1], [-16, 16]);
+  const deepY = useTransform(smoothY, [-1, 1], [-12, 12]);
+
+  const orbOneX = useTransform(smoothX, [-1, 1], [-18, 18]);
+
+  const orbOneY = useTransform(smoothY, [-1, 1], [-14, 14]);
+
+  const orbTwoX = useTransform(smoothX, [-1, 1], [14, -14]);
+
+  const orbTwoY = useTransform(smoothY, [-1, 1], [10, -10]);
 
   const rotateY = useTransform(smoothX, [-1, 1], [-4, 4]);
 
   const rotateX = useTransform(smoothY, [-1, 1], [3, -3]);
 
-  const cursorGlowX = useTransform(smoothX, [-1, 1], ["18%", "82%"]);
+  const cursorGlowX = useTransform(cursorLightX, [-1, 1], ["8%", "92%"]);
 
-  const cursorGlowY = useTransform(smoothY, [-1, 1], ["16%", "76%"]);
-
-  useEffect(() => {
-    if (shouldReduceMotion) {
-      return;
-    }
-
-    const handlePointerMove = (event: PointerEvent) => {
-      const x = event.clientX / window.innerWidth;
-      const y = event.clientY / window.innerHeight;
-
-      pointerX.set(x * 2 - 1);
-      pointerY.set(y * 2 - 1);
-    };
-
-    const resetPointer = () => {
-      pointerX.set(0);
-      pointerY.set(0);
-    };
-
-    window.addEventListener("pointermove", handlePointerMove);
-    document.documentElement.addEventListener("mouseleave", resetPointer);
-
-    return () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-
-      document.documentElement.removeEventListener("mouseleave", resetPointer);
-    };
-  }, [pointerX, pointerY, shouldReduceMotion]);
+  const cursorGlowY = useTransform(cursorLightY, [-1, 1], ["8%", "84%"]);
 
   return (
-    <div
+    <motion.div
       aria-hidden="true"
+      style={{
+        x: shouldReduceMotion ? 0 : backgroundX,
+        y: shouldReduceMotion ? 0 : backgroundY,
+      }}
       className="
         pointer-events-none
         absolute
@@ -92,7 +93,19 @@ export default function HeroBackground() {
       "
     >
       {/* Main pearl canvas */}
-      <div
+      <motion.div
+        animate={
+          shouldReduceMotion
+            ? undefined
+            : {
+                opacity: [1, 0.965, 1],
+              }
+        }
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: cinematicEase,
+        }}
         className="
           absolute
           inset-0
@@ -102,6 +115,19 @@ export default function HeroBackground() {
 
       {/* Mouse-following light */}
       <motion.div
+        animate={
+          shouldReduceMotion
+            ? undefined
+            : {
+                opacity: [1, 0.92, 1],
+                scale: [1, 1.028, 1],
+              }
+        }
+        transition={{
+          duration: 28,
+          repeat: Infinity,
+          ease: cinematicEase,
+        }}
         className="
           absolute
           h-[38rem]
@@ -119,7 +145,20 @@ export default function HeroBackground() {
       />
 
       {/* Top illumination */}
-      <div
+      <motion.div
+        animate={
+          shouldReduceMotion
+            ? undefined
+            : {
+                opacity: [1, 0.94, 1],
+                scale: [1, 1.012, 1],
+              }
+        }
+        transition={{
+          duration: 31,
+          repeat: Infinity,
+          ease: cinematicEase,
+        }}
         className="
           absolute
           inset-x-0
@@ -166,14 +205,14 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  scale: [1, 1.09, 1],
+                  scale: [1, 1.12, 1],
                   opacity: [0.34, 0.52, 0.34],
                 }
           }
           transition={{
-            duration: 7,
+            duration: 20,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             h-full
@@ -204,14 +243,14 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  scale: [1.03, 0.95, 1.03],
+                  scale: [1.04, 0.93, 1.04],
                   opacity: [0.32, 0.5, 0.32],
                 }
           }
           transition={{
-            duration: 8,
+            duration: 24,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             h-full
@@ -249,14 +288,14 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  y: [0, -16, 0],
+                  y: [0, -20, 0],
                   rotateZ: [-4.5, -3.1, -4.5],
                 }
           }
           transition={{
-            duration: 6,
+            duration: 18,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             absolute
@@ -276,15 +315,15 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  x: [0, 22, 0],
-                  y: [0, -13, 0],
+                  x: [0, 26, 0],
+                  y: [0, -16, 0],
                   rotate: [3, 4.5, 3],
                 }
           }
           transition={{
-            duration: 6.8,
+            duration: 19,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             absolute
@@ -307,15 +346,15 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  x: [0, -20, 0],
-                  y: [0, 14, 0],
+                  x: [0, -24, 0],
+                  y: [0, 17, 0],
                   rotate: [-4, -5.5, -4],
                 }
           }
           transition={{
-            duration: 7.4,
+            duration: 17,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             absolute
@@ -343,9 +382,9 @@ export default function HeroBackground() {
                 }
           }
           transition={{
-            duration: 4.8,
+            duration: 7,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             absolute
@@ -371,9 +410,9 @@ export default function HeroBackground() {
                 }
           }
           transition={{
-            duration: 5.5,
+            duration: 16.5,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             absolute
@@ -402,6 +441,7 @@ export default function HeroBackground() {
           top-[12%]
           h-24
           w-24
+          opacity-90
         "
       >
         <motion.div
@@ -409,15 +449,15 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  y: [0, -24, 0],
+                  y: [0, -28, 0],
                   rotate: [0, 18, 0],
                   scale: [1, 1.07, 1],
                 }
           }
           transition={{
-            duration: 5.2,
+            duration: 22,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             h-full
@@ -444,6 +484,7 @@ export default function HeroBackground() {
           top-[38%]
           h-12
           w-12
+          opacity-90
         "
       >
         <motion.div
@@ -451,14 +492,14 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  y: [0, 18, 0],
+                  y: [0, 22, 0],
                   scale: [1, 0.92, 1],
                 }
           }
           transition={{
-            duration: 4.8,
+            duration: 19,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             h-full
@@ -484,6 +525,7 @@ export default function HeroBackground() {
           right-[10%]
           h-[4.75rem]
           w-[4.75rem]
+          opacity-90
         "
       >
         <motion.div
@@ -491,15 +533,15 @@ export default function HeroBackground() {
             shouldReduceMotion
               ? undefined
               : {
-                  y: [0, -18, 0],
+                  y: [0, -22, 0],
                   scale: [1, 1.09, 1],
                   rotate: [0, -12, 0],
                 }
           }
           transition={{
-            duration: 5.8,
+            duration: 26,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: cinematicEase,
           }}
           className="
             h-full
@@ -517,7 +559,7 @@ export default function HeroBackground() {
       <motion.svg
         viewBox="0 0 1440 900"
         preserveAspectRatio="none"
-        className="absolute inset-0 h-full w-full"
+        className="absolute inset-0 h-full w-full opacity-90"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{
@@ -529,6 +571,10 @@ export default function HeroBackground() {
           d="M-160 760C155 520 283 807 566 592C829 391 984 109 1600 214"
           stroke="rgba(112,138,149,0.19)"
           strokeWidth="1.5"
+          style={{
+            x: shouldReduceMotion ? 0 : ribbonOneX,
+            y: shouldReduceMotion ? 0 : ribbonOneY,
+          }}
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{
@@ -542,6 +588,10 @@ export default function HeroBackground() {
           d="M-130 825C147 616 338 856 612 642C850 456 1076 224 1570 301"
           stroke="rgba(255,255,255,0.84)"
           strokeWidth="2"
+          style={{
+            x: shouldReduceMotion ? 0 : ribbonTwoX,
+            y: shouldReduceMotion ? 0 : ribbonTwoY,
+          }}
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{
@@ -555,6 +605,10 @@ export default function HeroBackground() {
           d="M-110 874C209 685 376 910 684 704C960 519 1154 382 1560 407"
           stroke="rgba(211,184,155,0.23)"
           strokeWidth="1.5"
+          style={{
+            x: shouldReduceMotion ? 0 : ribbonThreeX,
+            y: shouldReduceMotion ? 0 : ribbonThreeY,
+          }}
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{
@@ -602,6 +656,6 @@ export default function HeroBackground() {
           backgroundSize: "4px 4px",
         }}
       />
-    </div>
+    </motion.div>
   );
 }
